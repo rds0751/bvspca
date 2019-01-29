@@ -67,7 +67,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ('wagtail.contrib.styleguide', )
 
-ALLOWED_HOSTS = ('127.0.0.1', '10.0.0.101', 'localhost', 'www.dev.bluehut.ca', '192.168.0.106')
+ALLOWED_HOSTS = ('127.0.0.1', '10.0.0.101', 'localhost', 'www.dev.bluehut.ca', '192.168.0.106', '*')
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -77,75 +77,3 @@ ALLOWED_HOSTS = ('127.0.0.1', '10.0.0.101', 'localhost', 'www.dev.bluehut.ca', '
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'weekly_emails': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '{}/logs/weekly-email.log'.format(env.str('HOME')),
-            'formatter': 'verbose',
-        },
-        'social': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '{}/logs/social-media-posts.log'.format(env.str('HOME')),
-            'formatter': 'verbose',
-        },
-        'petpoint': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '{}/logs/petpoint-updates.log'.format(env.str('HOME')),
-            'formatter': 'verbose',
-        },
-        'petpoint-errors': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': '{}/logs/petpoint-errors.log'.format(env.str('HOME')),
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'bvspca.newsletter': {
-            'level': 'ERROR',
-            'handlers': ['weekly_emails'],
-            'propagate': False
-        },
-        'bvspca.social': {
-            'level': 'INFO',
-            'handlers': ['social'],
-            'propagate': False
-        },
-        'bvspca.animals.petpoint': {
-            'level': 'INFO',
-            'handlers': ['petpoint'],
-            'propagate': False
-        },
-        'bvspca.animals.petpoint.errors': {
-            'level': 'ERROR',
-            'handlers': ['petpoint-errors'],
-            'propagate': False
-        },
-    }
-}
