@@ -1,0 +1,1 @@
+web: gunicorn fec.fec.wsgi --log-file -
